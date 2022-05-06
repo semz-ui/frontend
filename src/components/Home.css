@@ -1,0 +1,8 @@
+.home {
+    border-style: solid;
+        border-width: thin;
+}
+
+.btn {
+    cursor: pointer;
+}

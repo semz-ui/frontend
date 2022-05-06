@@ -1,0 +1,33 @@
+.body {
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* text-align: center; */
+    max-width: fit-content;
+    /* margin-top: "200px", */
+    /* width: "200px", */
+    margin: auto;
+    background-color: whitesmoke;
+    border-radius: '40%';
+}
+
+.text {
+    cursor: pointer;
+}
+
+.col-3 {
+    width: 40%;
+}
+
+@media only screen and (max-width: 768px) {
+
+    /* For mobile phones: */
+    [class*="col-"] {
+        width: 100%;
+    }
+}
+
+.svg_icons {
+    transform: scale(1.8);
+    /* margin-left: "10px"; */
+}
