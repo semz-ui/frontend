@@ -5,20 +5,29 @@ import { useState } from "react";
 import "./Header.css";
 import logo from "../images/logo.jpeg";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
-import { SetMeal } from "@mui/icons-material";
 
 function Header() {
-  const [details, setEmail] = useState();
+  const [details, setDetails] = useState([]);
   const sendMail = async () => {
     alert("An email would be sent to you shortly");
     const request = await axios.get("/sendMail");
     // const randomNumber =
-    if (request.data) {
+    if (request.data.length) {
       console.log(request.data);
-      setEmail(request.data);
-      console.log(details);
-      const index = await axios.post("/sendMail", details);
-      if (index.data) alert("Thanks for using our service");
+      setDetails(request.data);
+      if (details) {
+        console.log(details);
+
+        const index = await axios.post("/sendMail", {
+          author: details.autor,
+          content: details.author,
+        });
+        if (index.data) alert("Thanks for using our service");
+      } else {
+        console.log("invalid details");
+      }
+    } else {
+      console.log("an error has occured");
     }
   };
 

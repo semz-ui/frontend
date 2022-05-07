@@ -14,6 +14,7 @@ function Home() {
 
   const submitForm = async (e) => {
     e.preventDefault();
+    console.log(data);
     const response = await axios.post("/user", data);
     if (response.data) console.log(response.data);
     window.location.assign("http://localhost:3000/body");
