@@ -1,8 +1,23 @@
-import { Link } from "react-router-dom";
-import React from "react";
+import React, { useState } from "react";
 import HomeImg from "../images/header.jpeg";
+import axios from "axios";
 
 function Home() {
+  const [data, setData] = useState();
+
+  const onHandle = async (e) => {
+    const value = { ...data };
+    value[e.target.id] = e.target.value;
+    setData(value);
+    console.log(data);
+  };
+
+  const submitForm = async (e) => {
+    e.preventDefault();
+    const response = await axios.post("/user", data);
+    if (response.data) console.log(response.data);
+    window.location.assign("http://localhost:3000/body");
+  };
   return (
     <div
       style={{
@@ -10,12 +25,11 @@ function Home() {
         padding: "70px",
         marginTop: "40px",
         backgroundColor: "whitesmoke",
-        // width: "300px",
+
         borderRadius: "40px",
         maxWidth: "fit-content",
         justifyContent: "center",
         borderWidth: "thin",
-        // border: "10px",
       }}
       className='home'
     >
@@ -35,12 +49,19 @@ function Home() {
           //   display: "-ms-grid",
         }}
       >
-        <form>
+        <form
+          onSubmit={(e) => {
+            submitForm(e);
+          }}
+        >
           <div>
             <label>
               <input
-                type='text'
-                name='name'
+                className='form-control'
+                onChange={(e) => {
+                  onHandle(e);
+                }}
+                type='email'
                 placeholder='Please enter your Email'
                 style={{
                   //   padding: "10px",
@@ -51,31 +72,31 @@ function Home() {
                   borderColor: "grey",
                   border: "none",
                   outline: "none",
-                  //   backgroundColor: "whitesmoke",
+                  backgroundColor: "whitesmoke",
                 }}
+                required
+                id='email'
               />
             </label>
           </div>
 
-          <Link to='/body'>
-            <input
-              className='btn'
-              type='submit'
-              value='Submit'
-              style={{
-                padding: "10px",
-                marginTop: "20px",
-                width: "100px",
-                justifyContent: "center",
-                marginLeft: "90px",
-                borderRadius: "10px",
-                border: "none",
-                fontSize: "18px",
-                fontWeight: "bold",
-                backgroundColor: "#d1d1ff",
-              }}
-            />
-          </Link>
+          <input
+            className='btn'
+            type='submit'
+            value='Continue'
+            style={{
+              padding: "10px",
+              marginTop: "20px",
+              width: "100px",
+              justifyContent: "center",
+              marginLeft: "90px",
+              borderRadius: "10px",
+              border: "none",
+              fontSize: "18px",
+              fontWeight: "bold",
+              backgroundColor: "#d1d1ff",
+            }}
+          />
         </form>
       </div>
     </div>

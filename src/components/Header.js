@@ -1,10 +1,27 @@
 import React from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import "./Header.css";
 import logo from "../images/logo.jpeg";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
+import { SetMeal } from "@mui/icons-material";
 
 function Header() {
+  const [details, setEmail] = useState();
+  const sendMail = async () => {
+    alert("An email would be sent to you shortly");
+    const request = await axios.get("/sendMail");
+    // const randomNumber =
+    if (request.data) {
+      console.log(request.data);
+      setEmail(request.data);
+      console.log(details);
+      const index = await axios.post("/sendMail", details);
+      if (index.data) alert("Thanks for using our service");
+    }
+  };
+
   return (
     <div
       className='header'
@@ -32,7 +49,7 @@ function Header() {
       <h3 style={{ marginTop: "10px" }}>Motivation</h3>
       <div
         onClick={() => {
-          console.log("Clicked");
+          sendMail();
         }}
       >
         <SaveAltIcon className='svg_icon' />

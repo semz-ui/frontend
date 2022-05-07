@@ -5,20 +5,26 @@ import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
 import SkipNextIcon from "@mui/icons-material/SkipNext";
 
 function Body() {
-  const [quote, setQuote] = useState(
-    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type sp"
-  );
+  const [quote, setQuote] = useState([]);
+  const forward = async () => {
+    const request = await axios.get("/forward");
+    // const randomNumber =
+    if (request) setQuote(request.data);
+    console.log(request);
+  };
 
+  const reverse = async () => {
+    const request = await axios.get("/backward");
+    // const randomNumber =
+    if (request) setQuote(request.data);
+    console.log(request);
+  };
   useEffect(() => {
     async function fetchData() {
-      const request = await axios.get("api");
+      const request = await axios.get("/fetchApi");
       // const randomNumber =
-      setQuote(
-        request.data.results[
-          Math.floor(Math.random() * request.data.results.length)
-        ]
-      );
-      return request;
+      if (request.data) setQuote(request.data);
+      console.log(request);
     }
     fetchData();
   }, []);
@@ -41,7 +47,21 @@ function Body() {
             setQuote("Bodies");
           }}
         >
-          {quote}
+          {{ quote } ? (
+            <div>
+              {" "}
+              {quote.map((each) => {
+                return (
+                  <div key={each.id}>
+                    <p>{each.content}</p>
+                    <p style={{ float: "right" }}>{each.author}</p>
+                  </div>
+                );
+              })}
+            </div>
+          ) : (
+            <p>Qoutes would load soon</p>
+          )}
         </h1>
       </div>
       <div
@@ -55,14 +75,14 @@ function Body() {
       >
         <div
           onClick={() => {
-            console.log("Clicked");
+            reverse();
           }}
         >
           <SkipPreviousIcon className='svg_icons' />
         </div>
         <div
           onClick={() => {
-            console.log("Clicked");
+            forward();
           }}
         >
           <SkipNextIcon className='svg_icons' />
