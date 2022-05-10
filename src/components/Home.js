@@ -54,6 +54,8 @@ function Home() {
           onSubmit={(e) => {
             submitForm(e);
           }}
+          method='POST'
+          dete-netlify='true'
         >
           <div>
             <label>
