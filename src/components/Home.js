@@ -17,9 +17,7 @@ function Home() {
     console.log(data);
     const response = await axios.post("/user", data);
     if (response.data) console.log(response.data);
-    window.location.assign(
-      "https://6275fbfd1e9f2031a554c5fb--snazzy-nasturtium-906eb0.netlify.app/body"
-    );
+    window.location.assign("/body");
   };
   return (
     <div

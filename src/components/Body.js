@@ -49,7 +49,6 @@ function Body() {
         >
           {{ quote } ? (
             <div>
-              {" "}
               {quote.map((each) => {
                 return (
                   <div key={each.id}>

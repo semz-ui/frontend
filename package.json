@@ -3,7 +3,7 @@
   "name": "Front",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://5033-102-219-153-28.eu.ngrok.io",
+  "proxy": "https://fcd7-129-205-124-226.in.ngrok.io",
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
